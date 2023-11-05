@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\ProjectController;
 -   dentro il controller
 
 ```php
-use App\Model\Project;
+use App\Models\Project;
 ```
 
 ```php
