@@ -31,6 +31,10 @@ composer install
 
 ```
 php artisan serve
+
+oppure... per vedere le immagini.
+
+php -S localhost:8000 -t public/
 ```
 
 5. Copia il file `.env.example` e chiamalo `.env`. Poi esegui il comando per generare la chiave
