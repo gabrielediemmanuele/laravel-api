@@ -16,7 +16,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::select("id", "title", "author", "date", "link", "type_id", "description", "cover_image")->paginate(10);
+        $projects = Project::select("id", "title", "author", "date", "link", "type_id", "description", "cover_image")
+            ->with('type:id,label', 'technologies:id,tech_name')
+            ->paginate(10);
+
         return response()->json($projects);
     }
 
@@ -41,6 +44,7 @@ class ProjectController extends Controller
     {
         $project = Project::select("id", "title", "author", "date", "link", "type_id", "description", "cover_image")
             ->where('id', $id)
+            ->with('type:id,label', 'technologies:id,tech_name')
             ->first();
 
         return response()->json($project);
