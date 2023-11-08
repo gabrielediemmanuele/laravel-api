@@ -18,7 +18,7 @@ class ProjectController extends Controller
     {
         $projects = Project::select("id", "title", "author", "date", "link", "type_id", "description", "cover_image")
             ->with('type:id,label', 'technologies:id,tech_name')
-            ->paginate(10);
+            ->paginate(20);
 
         return response()->json($projects);
     }
@@ -79,7 +79,7 @@ class ProjectController extends Controller
             ->where("type_id", $type_id)
             ->with('type:id,label', 'technologies:id,tech_name')
             ->orderByDesc('id')
-            ->paginate(10);
+            ->paginate(20);
 
         return response()->json($projects);
     }
