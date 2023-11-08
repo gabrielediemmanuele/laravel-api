@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Type;
 use App\Models\Project;
 
 class ProjectController extends Controller
@@ -71,5 +71,16 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function projectsByType($type_id)
+    {
+        $projects = Project::select("id", "title", "author", "date", "link", "type_id", "description", "cover_image")
+            ->where("type_id", $type_id)
+            ->with('type:id,label', 'technologies:id,tech_name')
+            ->orderByDesc('id')
+            ->paginate(10);
+
+        return response()->json($projects);
     }
 }
