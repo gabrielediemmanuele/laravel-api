@@ -84,8 +84,10 @@ class ProjectController extends Controller
         return response()->json($projects);
     }
 
-    public function projectsByFilters($filters)
+    public function projectsByFilters(Request $request)
     {
+        $filters = $request->all();
+
         $projects_query = Project::select("id", "title", "author", "date", "link", "type_id", "description", "cover_image")
             ->with('type:id,label', 'technologies:id,tech_name')
             ->orderByDesc('id');
