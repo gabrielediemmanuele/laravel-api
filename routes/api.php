@@ -23,4 +23,4 @@ Route::get('/projects-by-type/{type_id}', [ProjectController::class, 'projectsBy
 
 Route::get('/get-projects-by-filters', [ProjectController::class, 'projectsByFilters']);
 
-Route::apiResource('types', TypeController::class)->only(['show']);
+Route::apiResource('types', TypeController::class)->only(['index', 'show']);

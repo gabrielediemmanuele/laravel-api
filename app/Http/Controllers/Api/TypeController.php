@@ -15,7 +15,9 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::select('id', 'label')->get();
+
+        return response()->json($types);
     }
 
     public function show($id)
