@@ -83,4 +83,19 @@ class ProjectController extends Controller
 
         return response()->json($projects);
     }
+
+    public function projectsByFilters($filters)
+    {
+        $projects_query = Project::select("id", "title", "author", "date", "link", "type_id", "description", "cover_image")
+            ->with('type:id,label', 'technologies:id,tech_name')
+            ->orderByDesc('id');
+
+        if (!empty($filters['activeTypes'])) {
+            $projects_query->whereIn('type_id', $filters['activeTypes']);
+        }
+
+        $projects = $projects_query->paginate(20);
+
+        return response()->json($projects);
+    }
 }
